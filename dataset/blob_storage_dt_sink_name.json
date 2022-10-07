@@ -35,9 +35,5 @@
 		},
 		"schema": []
 	},
-	"type": "Microsoft.DataFactory/factories/datasets",
-	"apiVersion": "2018-06-01",
-	"dependsOn": [
-		"[concat(variables('factoryId'), '/linkedServices/blob_storage_linked_service')]"
-	]
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

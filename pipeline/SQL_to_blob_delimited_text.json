@@ -101,8 +101,8 @@
 				"type": "string"
 			}
 		},
-		"annotations": []
+		"annotations": [],
+		"lastPublishTime": "2022-10-07T07:29:23Z"
 	},
-	"type": "Microsoft.DataFactory/factories/pipelines",
-	"apiVersion": "2018-06-01"
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }
