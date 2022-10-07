@@ -5,7 +5,7 @@
             "properties": {
                 "activities": [
                     {
-                        "name": "Loop over input from Python app",
+                        "name": "Loop tables",
                         "type": "ForEach",
                         "dependsOn": [],
                         "userProperties": [],
