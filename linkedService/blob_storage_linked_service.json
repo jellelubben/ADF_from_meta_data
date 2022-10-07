@@ -6,7 +6,7 @@
                 "annotations": [],
                 "type": "AzureBlobStorage",
                 "typeProperties": {
-                    "connectionString": "Data Source=tcp:riv-jelle-bb-testdata-server.database.windows.net,1433;Initial Catalog=riv-bb-jelle-test-db;Persist Security Info=False;User ID=CloudSAaf7c3124;Password=siz6iJzR6gzEKRh;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+                    "connectionString": "DefaultEndpointsProtocol=https;AccountName=rivbbjellesa;AccountKey=6pgiw8wIgDICikY7N9MLsWCNZQn3E5B1iJyQUJLltIA7Jsq0iqxs+fMVO4lZJu7stB2g+pqj21K8+AStIxkGmA==;EndpointSuffix=core.windows.net"
                 }
             },
             "dependsOn": []
