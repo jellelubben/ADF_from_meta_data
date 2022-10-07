@@ -1,0 +1,9 @@
+{
+	"name": "metadata-test-factory",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "82000938-b319-4050-ae7c-29dcf9b2837c",
+		"tenantId": "540d6e0e-8b44-4420-a0b5-a06c4d7f9666"
+	}
+}
