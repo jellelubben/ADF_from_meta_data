@@ -6,14 +6,14 @@
                 "annotations": [],
                 "type": "AzureBlobStorage",
                 "typeProperties": {
-                    "connectionString": "DefaultEndpointsProtocol=https;AccountName=bbmetadataadls;",
+                    "connectionString": "DefaultEndpointsProtocol=https;AccountName=bbmetadataadls;" ,
                   "accountKey": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "key_vault",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "blobkey"
+                      "type": "AzureKeyVaultSecret",
+                      "store": {
+                      "referenceName": "key_vault",
+                      "type": "LinkedServiceReference"
+                  },
+                  "secretName": "blobkey"
 			}
                 }
             },
