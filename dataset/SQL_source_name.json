@@ -16,7 +16,7 @@
                     }
                 },
                 "annotations": [],
-                "type": "AzureSqlTable",
+                "type": "AzurePostgreSql",
                 "schema": [],
                 "typeProperties": {
                     "schema": {
