@@ -2,7 +2,7 @@
             "name": "delimited_text_sink_name",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "delimited_text_linked_service",
+                    "referenceName": "",
                     "type": "LinkedServiceReference"
                 },
                 "parameters": {
