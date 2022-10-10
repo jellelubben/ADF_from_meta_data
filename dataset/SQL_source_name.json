@@ -1,32 +1,32 @@
 {
-            "name": "SQL_source_name",
-            "type": "Microsoft.DataFactory/factories/datasets",
-            "apiVersion": "2018-06-01",
-            "properties": {
-                "linkedServiceName": {
-                    "referenceName": "AzureSqlDatabase_linked_service",
-                    "type": "LinkedServiceReference"
-                },
-                "parameters": {
-                    "table": {
-                        "type": "string"
-                    },
-                    "schema": {
-                        "type": "string"
-                    }
-                },
-                "annotations": [],
-                "type": "AzureSqlTable",
-                "schema": [],
-                "typeProperties": {
-                    "schema": {
-                        "value": "@dataset().schema",
-                        "type": "Expression"
-                    },
-                    "table": {
-                        "value": "@dataset().table",
-                        "type": "Expression"
-                    }
-                }
-            }
-        }
+	"name": "SQL_source_name",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().table",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets",
+	"apiVersion": "2018-06-01"
+}
