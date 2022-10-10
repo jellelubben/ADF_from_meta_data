@@ -1,5 +1,5 @@
 {
-	"name": "sql_server_to_delimited_textpipeline",
+	"name": "sql_server_to_parquet_pipeline",
 	"properties": {
 		"activities": [
 			{
