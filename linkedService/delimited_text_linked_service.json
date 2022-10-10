@@ -1,13 +1,20 @@
 {
-            "name": "delimited_text_linked_service",
-            "type": "Microsoft.DataFactory/factories/linkedServices",
-            "apiVersion": "2018-06-01",
-            "properties": {
-                "annotations": [],
-                "type": "AzureBlobStorage",
-                "typeProperties": {
-                    "connectionString": "None"
-                }
-            },
-            "dependsOn": []
-        }
+	"name": "delimited_text_linked_service",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=bbmetadataadls;",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "blobkey"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedServices",
+	"apiVersion": "2018-06-01"
+}
