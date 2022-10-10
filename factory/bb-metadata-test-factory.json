@@ -1,0 +1,9 @@
+{
+	"name": "bb-metadata-test-factory",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "692f5c82-ca6a-4a5c-a4c3-d8ad7d92c819",
+		"tenantId": "540d6e0e-8b44-4420-a0b5-a06c4d7f9666"
+	}
+}
