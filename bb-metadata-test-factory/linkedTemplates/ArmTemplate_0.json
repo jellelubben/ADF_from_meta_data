@@ -7,13 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "bb-metadata-test-factory"
 		},
+		"sql_server_linked_service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sql_server_linked_service'"
+		},
 		"delimited_text_linked_service_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'delimited_text_linked_service'"
 		},
-		"sql_server_linked_service_connectionString": {
+		"parquet_linked_service_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'sql_server_linked_service'"
+			"metadata": "Secure string for 'connectionString' of 'parquet_linked_service'"
 		},
 		"key_vault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -36,6 +40,62 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sql_server_linked_service')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('sql_server_linked_service_connectionString')]",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "key_vault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "sqladmin"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sql_server_name')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sql_server_linked_service",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"table": {
+						"type": "string"
+					},
+					"schema": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().schema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sql_server_linked_service')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/delimited_text_linked_service')]",
@@ -61,21 +121,21 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/sql_server_linked_service')]",
+			"name": "[concat(parameters('factoryName'), '/parquet_linked_service')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('sql_server_linked_service_connectionString')]",
-					"password": {
+					"connectionString": "[parameters('parquet_linked_service_connectionString')]",
+					"accountKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "key_vault",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "sqladmin"
+						"secretName": "blobkey"
 					}
 				}
 			},
@@ -84,7 +144,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/delimited_text_sink_name')]",
+			"name": "[concat(parameters('factoryName'), '/delimited_text_name')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -127,42 +187,47 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/sql_server_name')]",
+			"name": "[concat(parameters('factoryName'), '/parquet_name')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "sql_server_linked_service",
+					"referenceName": "parquet_linked_service",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"table": {
+					"filename": {
 						"type": "string"
 					},
-					"schema": {
+					"dir": {
 						"type": "string"
 					}
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
+				"type": "Parquet",
 				"typeProperties": {
-					"schema": {
-						"value": "@dataset().schema",
-						"type": "Expression"
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().dir",
+							"type": "Expression"
+						},
+						"container": "exports"
 					},
-					"table": {
-						"value": "@dataset().table",
-						"type": "Expression"
-					}
-				}
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/sql_server_linked_service')]"
+				"[concat(variables('factoryId'), '/linkedServices/parquet_linked_service')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/sql_server_to_delimited_textpipeline')]",
+			"name": "[concat(parameters('factoryName'), '/sql_server_to_delimited_text_pipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -239,7 +304,7 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "delimited_text_sink_name",
+											"referenceName": "delimited_text_name",
 											"type": "DatasetReference",
 											"parameters": {
 												"filename": {
@@ -274,7 +339,121 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/sql_server_name')]",
-				"[concat(variables('factoryId'), '/datasets/delimited_text_sink_name')]"
+				"[concat(variables('factoryId'), '/datasets/delimited_text_name')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sql_server_to_parquet_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Loop tables",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.elements",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Get data from source",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 1,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"sqlReaderQuery": {
+												"value": "@item().query",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobStorageWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "sql_server_name",
+											"type": "DatasetReference",
+											"parameters": {
+												"table": {
+													"value": "@item().tablename",
+													"type": "Expression"
+												},
+												"schema": {
+													"value": "@item().schemaname",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "parquet_name",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@concat(item().tablename, '.parquet')",
+													"type": "Expression"
+												},
+												"dir": {
+													"value": "@pipeline().parameters.dir",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"elements": {
+						"type": "array"
+					},
+					"dir": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/sql_server_name')]",
+				"[concat(variables('factoryId'), '/datasets/parquet_name')]"
 			]
 		}
 	]

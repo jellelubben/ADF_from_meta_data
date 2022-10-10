@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'delimited_text_linked_service'"
 		},
+		"parquet_linked_service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'parquet_linked_service'"
+		},
 		"sql_server_linked_service_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'sql_server_linked_service'"
@@ -46,11 +50,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"sql_server_linked_service_connectionString": {
+						"value": "[parameters('sql_server_linked_service_connectionString')]"
+					},
 					"delimited_text_linked_service_connectionString": {
 						"value": "[parameters('delimited_text_linked_service_connectionString')]"
 					},
-					"sql_server_linked_service_connectionString": {
-						"value": "[parameters('sql_server_linked_service_connectionString')]"
+					"parquet_linked_service_connectionString": {
+						"value": "[parameters('parquet_linked_service_connectionString')]"
 					},
 					"key_vault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('key_vault_properties_typeProperties_baseUrl')]"

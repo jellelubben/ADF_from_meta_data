@@ -8,6 +8,9 @@
 		"delimited_text_linked_service_connectionString": {
 			"value": ""
 		},
+		"parquet_linked_service_connectionString": {
+			"value": ""
+		},
 		"sql_server_linked_service_connectionString": {
 			"value": ""
 		},
