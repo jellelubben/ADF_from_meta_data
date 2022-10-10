@@ -1,0 +1,21 @@
+{
+	"name": "Parquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "parquet_linked_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "@dataset().filename",
+				"folderPath": "@dataset().dir",
+				"container": "exports"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
