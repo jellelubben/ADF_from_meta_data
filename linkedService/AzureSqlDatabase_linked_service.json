@@ -5,7 +5,7 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-            "connectionString": ""Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=metadata-sql-server.database.windows.net;Initial Catalog=metadata-adventureworks-database;User ID=metadata-admin",",
+            "connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=metadata-sql-server.database.windows.net;Initial Catalog=metadata-adventureworks-database;User ID=metadata-admin;",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
