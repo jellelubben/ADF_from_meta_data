@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "bb-metadata-test-factory"
+		},
+		"delimited_text_linked_service_connectionString": {
+			"value": ""
+		},
+		"sql_server_linked_service_connectionString": {
+			"value": ""
+		},
+		"key_vault_properties_typeProperties_baseUrl": {
+			"value": "https://metadata-test-keys.vault.azure.net/"
+		}
+	}
+}
