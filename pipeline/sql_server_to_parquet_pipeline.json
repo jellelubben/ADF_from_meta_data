@@ -1,5 +1,7 @@
 {
 	"name": "sql_server_to_parquet_pipeline",
+	"type": "Microsoft.DataFactory/factories/pipelines",
+	"apiVersion": "2018-06-01",
 	"properties": {
 		"activities": [
 			{
@@ -72,7 +74,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Parquet1",
+									"referenceName": "parquet_name",
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
@@ -100,7 +102,5 @@
 			}
 		},
 		"annotations": []
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines",
-	"apiVersion": "2018-06-01"
+	}
 }
