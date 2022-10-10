@@ -1,13 +1,19 @@
-        {
-            "name": "AzureSqlDatabase_linked_service",
-            "type": "Microsoft.DataFactory/factories/linkedServices",
-            "apiVersion": "2018-06-01",
-            "properties": {
-                "annotations": [],
-                "type": "AzureSqlDatabase",
-                "typeProperties": {
-                    "connectionString": "Data Source=tcp:riv-jelle-bb-testdata-server.database.windows.net,1433;Initial Catalog=riv-bb-jelle-test-db;Persist Security Info=False;User ID=CloudSAaf7c3124;Password=siz6iJzR6gzEKRh;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-                }
-            },
-            "dependsOn": []
-        }
+{
+	"name": "AzureSqlDatabase_linked_service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+            "connectionString": "Data Source=tcp:riv-jelle-bb-testdata-server.database.windows.net,1433;Initial Catalog=riv-bb-jelle-test-db;Persist Security Info=False;User ID=CloudSAaf7c3124;Password=siz6iJzR6gzEKRh;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sqladmin"
+			}
+		}
+	}
+}
