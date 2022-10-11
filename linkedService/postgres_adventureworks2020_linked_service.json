@@ -1,11 +1,18 @@
 {
 	"name": "postgres_adventureworks2020_linked_service",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzurePostgreSql",
 		"typeProperties": {
 			"connectionString": "Host=postgresql-adventureworks-bb-metadata.postgres.database.azure.com;Port=5432;Database=postgres;UID=postgresqladmin;EncryptionMethod=1;ValidateServerCertificate=0",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "postgresqladmin"
+			},
 			"accountKey": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
@@ -15,5 +22,6 @@
 				"secretName": "postgresqladmin"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
