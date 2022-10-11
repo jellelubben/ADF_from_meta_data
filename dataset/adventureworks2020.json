@@ -1,0 +1,32 @@
+{
+            "name": "adventureworks2020",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "postgres_adventureworks2020_linked_service",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "table": {
+                        "type": "string"
+                    },
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzurePostgreSql",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().table",
+                        "type": "Expression"
+                    }
+                }
+            }
+        }
