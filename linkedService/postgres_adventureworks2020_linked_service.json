@@ -6,8 +6,8 @@
                 "annotations": [],
                 "type": "AzurePostgreSql",
                 "typeProperties": {
-                    "connectionString": "None" ,
-                  "password": {
+                    "connectionString": "Host=postgresql-adventureworks-bb-metadata.postgres.database.azure.com;Port=5432;Database=postgres;UID=postgresqladmin;EncryptionMethod=1;ValidateServerCertificate=0" ,
+                  "accountKey": {
                       "type": "AzureKeyVaultSecret",
                       "store": {
                       "referenceName": "key_vault",
