@@ -7,7 +7,7 @@
                 "type": "AzureBlobStorage",
                 "typeProperties": {
                     "connectionString": "DefaultEndpointsProtocol=https;AccountName=bbmetadataadls;" ,
-                  "accountKey": {
+                       
                       "type": "AzureKeyVaultSecret",
                       "store": {
                       "referenceName": "key_vault",
