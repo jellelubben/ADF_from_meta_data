@@ -1,10 +1,6 @@
 {
 	"name": "parquet_storage",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "parquet_linked_service",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"filename": {
 				"type": "string"
