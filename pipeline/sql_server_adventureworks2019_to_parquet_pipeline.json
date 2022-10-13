@@ -74,7 +74,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "parquet_storage",
+									"referenceName": "adventureworks_storage",
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
